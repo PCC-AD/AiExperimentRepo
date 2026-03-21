@@ -1,6 +1,8 @@
 # Ollama Setup (Windows)
 
-This repository now includes a reproducible local Ollama setup for `dolphin-llama3`.
+This repository includes a reproducible local Ollama setup for `dolphin-llama3`.
+
+**Full guide (Cursor, ngrok, custom Modelfiles, scripts):** see [docs/LOCAL_SETUP.md](docs/LOCAL_SETUP.md).
 
 ## Installed
 

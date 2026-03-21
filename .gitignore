@@ -1,0 +1,4 @@
+scripts/.last-cursor-ollama-base-url.txt
+
+# Local Modelfile overrides (custom SYSTEM prompts stay private)
+Modelfile.my-dolphin

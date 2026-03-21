@@ -1,0 +1,10 @@
+FROM dolphin-llama3
+
+SYSTEM """
+You are Dolphin, a helpful AI assistant.
+Edit this block with your own system prompt. Save the file, then run:
+
+  ollama create my-dolphin -f .\Modelfile.my-dolphin
+
+Use any model name you like instead of my-dolphin.
+"""
