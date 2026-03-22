@@ -1,0 +1,12 @@
+# Copy to a local file and customize SYSTEM. Rebuild with:
+#   ollama create mycursorlocal -f .\Modelfile.mycursor
+#
+# PARAMETER num_gpu 0 avoids GPU OOM / "unable to allocate CUDA_Host buffer"
+# on machines where llama3.1:8b fails on CUDA.
+
+FROM llama3.1:8b
+PARAMETER num_gpu 0
+
+SYSTEM """
+You are a helpful coding assistant.
+"""

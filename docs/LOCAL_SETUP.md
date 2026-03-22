@@ -163,6 +163,7 @@ Use **`dolphin-llama3`** / non-tool models in **Ollama CLI or other clients** th
 | *Model name is not valid* (Cursor) | Try a name **without hyphens** (`mydolphin` not `my-dolphin`); run `ollama cp old-name new_name`. Turn **OpenAI API Key** **on** with a placeholder key. |
 | `GET /v1` → 404 in ngrok | Normal if something requested bare `/v1` (e.g. browser). Use `/v1/models` or let Cursor call `/v1/chat/completions`. |
 | *does not support tools* (Ollama) | Cursor sends **tools**; your model must support tool calling. Use e.g. **`llama3.1:8b`** (see section above), not only `dolphin-llama3`-based tags. |
+| *unable to allocate CUDA_Host buffer* / GPU OOM | Add **`PARAMETER num_gpu 0`** to the Modelfile (CPU-only), same idea as `dolphin-llama3-cpu`. Re-run `ollama create mycursorlocal -f .\Modelfile.mycursor`. See `Modelfile.llama31-cursor-cpu.example`. |
 | Wrong Ollama port | Set `OLLAMA_HOST` or use `-Port` on the script. |
 
 ---
