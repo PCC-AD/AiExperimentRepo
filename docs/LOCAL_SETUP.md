@@ -166,6 +166,7 @@ Use **`dolphin-llama3`** / non-tool models in **Ollama CLI or other clients** th
 | *unable to allocate CUDA_Host buffer* / GPU OOM | Add **`PARAMETER num_gpu 0`** to the Modelfile (CPU-only), same idea as `dolphin-llama3-cpu`. Re-run `ollama create mycursorlocal -f .\Modelfile.mycursor`. See `Modelfile.llama31-cursor-cpu.example`. |
 | *unable to allocate CPU buffer* | Not enough **system RAM** for weights + KV cache. Add **`PARAMETER num_ctx 4096`** (or **`2048`**). If it still fails, use a **smaller base** (e.g. `llama3.2:3b`): `ollama pull llama3.2:3b`, then `FROM llama3.2:3b` — see `Modelfile.llama32-3b-cursor-cpu.example`. Close other heavy apps before loading. |
 | *requires more system memory … than is available* | The chosen tag (e.g. **8B**) needs more contiguous free RAM than Windows has. Switch Modelfile to **`FROM llama3.2:3b`** (or **`llama3.2:1b`**) and `ollama pull` that tag, then `ollama create …` again. |
+| *llama runner … exit status 2* | Same class of error as unstable GPU runners (see [OLLAMA_SETUP.md](../OLLAMA_SETUP.md)). **1)** Run `ollama run llama3.2:3b` (no custom model). If that fails, update Ollama or try **`llama3.2:1b`**. **2)** If base works, build a **minimal** Modelfile (short `SYSTEM`) — see `Modelfile.llama32-3b-minimal.example`. **3)** If only the huge `SYSTEM` build fails, shorten the prompt or split content. |
 | Wrong Ollama port | Set `OLLAMA_HOST` or use `-Port` on the script. |
 
 ---

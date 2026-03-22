@@ -1,0 +1,13 @@
+# Minimal Modelfile to test "exit status 2" — if this works, the crash may be tied to
+# a very large SYSTEM block or another PARAMETER in your full Modelfile.
+#
+#   ollama create mycursortest -f .\Modelfile.llama32-3b-minimal.example
+#   ollama run mycursortest
+
+FROM llama3.2:3b
+PARAMETER num_gpu 0
+PARAMETER num_ctx 4096
+
+SYSTEM """
+You are a helpful assistant.
+"""
