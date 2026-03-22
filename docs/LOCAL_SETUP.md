@@ -121,6 +121,22 @@ Runs the PowerShell script with `-ExecutionPolicy Bypass`.
    - **OpenAI API Key:** turn **ON** and enter a placeholder (e.g. `ollama` or `sk-local`). Many setups fail if the key toggle is off while using a custom base URL.
 3. Select that model in Chat and test with a short prompt.
 
+### Tool calling (why Ask/Plan can still fail)
+
+Cursor often sends OpenAI-style **`tools`** (function calling) to your base URL—even in **Ask**—because parts of the UI still use an agent-style request path. **Ollama** will error if the model does not support tools, for example:
+
+`… does not support tools`
+
+Models built from **`dolphin-llama3`** (and many other tags) may **not** be tool-capable. For Cursor + Ollama, prefer a base that supports tools (see [Ollama tool calling](https://docs.ollama.com/capabilities/tool-calling)), e.g. **`llama3.1`**:
+
+```powershell
+ollama pull llama3.1:8b
+```
+
+Add **`llama3_1_8b`** or similar in Cursor (no hyphens if Cursor rejects them), or create a custom model with `FROM llama3.1:8b` and your own `SYSTEM` block, then `ollama create mycursorlocal -f .\Modelfile`.
+
+Use **`dolphin-llama3`** / non-tool models in **Ollama CLI or other clients** that do not attach tools; expect **Cursor** to require a tool-capable model for integrated chat.
+
 ---
 
 ## ngrok authentication (one-time)
@@ -146,6 +162,7 @@ Runs the PowerShell script with `-ExecutionPolicy Bypass`.
 | Cursor cannot reach model | Base URL must end with `/v1`; model name must match `ollama list`. |
 | *Model name is not valid* (Cursor) | Try a name **without hyphens** (`mydolphin` not `my-dolphin`); run `ollama cp old-name new_name`. Turn **OpenAI API Key** **on** with a placeholder key. |
 | `GET /v1` → 404 in ngrok | Normal if something requested bare `/v1` (e.g. browser). Use `/v1/models` or let Cursor call `/v1/chat/completions`. |
+| *does not support tools* (Ollama) | Cursor sends **tools**; your model must support tool calling. Use e.g. **`llama3.1:8b`** (see section above), not only `dolphin-llama3`-based tags. |
 | Wrong Ollama port | Set `OLLAMA_HOST` or use `-Port` on the script. |
 
 ---
