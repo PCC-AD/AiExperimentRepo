@@ -1,0 +1,13 @@
+# Use if llama3.1:8b still fails with "unable to allocate CPU buffer"
+# (smaller weights + less RAM). Tool calling: check Ollama docs for your version.
+#
+#   ollama pull llama3.2:3b
+#   ollama create mycursorlocal -f .\Modelfile.mycursor
+
+FROM llama3.2:3b
+PARAMETER num_gpu 0
+PARAMETER num_ctx 4096
+
+SYSTEM """
+You are a helpful coding assistant.
+"""

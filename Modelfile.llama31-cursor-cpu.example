@@ -6,6 +6,7 @@
 
 FROM llama3.1:8b
 PARAMETER num_gpu 0
+PARAMETER num_ctx 4096
 
 SYSTEM """
 You are a helpful coding assistant.

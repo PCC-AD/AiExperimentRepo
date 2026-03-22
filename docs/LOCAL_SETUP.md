@@ -164,6 +164,7 @@ Use **`dolphin-llama3`** / non-tool models in **Ollama CLI or other clients** th
 | `GET /v1` → 404 in ngrok | Normal if something requested bare `/v1` (e.g. browser). Use `/v1/models` or let Cursor call `/v1/chat/completions`. |
 | *does not support tools* (Ollama) | Cursor sends **tools**; your model must support tool calling. Use e.g. **`llama3.1:8b`** (see section above), not only `dolphin-llama3`-based tags. |
 | *unable to allocate CUDA_Host buffer* / GPU OOM | Add **`PARAMETER num_gpu 0`** to the Modelfile (CPU-only), same idea as `dolphin-llama3-cpu`. Re-run `ollama create mycursorlocal -f .\Modelfile.mycursor`. See `Modelfile.llama31-cursor-cpu.example`. |
+| *unable to allocate CPU buffer* | Not enough **system RAM** for weights + KV cache. Add **`PARAMETER num_ctx 4096`** (or **`2048`**). If it still fails, use a **smaller base** (e.g. `llama3.2:3b`): `ollama pull llama3.2:3b`, then `FROM llama3.2:3b` — see `Modelfile.llama32-3b-cursor-cpu.example`. Close other heavy apps before loading. |
 | Wrong Ollama port | Set `OLLAMA_HOST` or use `-Port` on the script. |
 
 ---
