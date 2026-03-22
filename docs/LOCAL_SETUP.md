@@ -141,6 +141,7 @@ Runs the PowerShell script with `-ExecutionPolicy Bypass`.
 | Issue | What to try |
 |-------|-------------|
 | `ngrok` not found | New terminal after `winget install`, or refresh `PATH`. |
+| `ERR_NGROK_121` / agent too old | Run `ngrok update` or `winget upgrade Ngrok.Ngrok`; free accounts require a minimum agent version (see ngrok error text). |
 | Tunnel never appears | Check the ngrok window for errors; confirm authtoken. |
 | Cursor cannot reach model | Base URL must end with `/v1`; model name must match `ollama list`. |
 | Wrong Ollama port | Set `OLLAMA_HOST` or use `-Port` on the script. |
