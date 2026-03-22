@@ -116,9 +116,9 @@ Runs the PowerShell script with `-ExecutionPolicy Bypass`.
 
 1. Start Ollama and run the tunnel script so you have an HTTPS base URL ending in **`/v1`**.
 2. **Cursor → Settings → Models → Add model**
-   - **Model name:** must match Ollama exactly (e.g. `dolphin-llama3`, `dolphin-llama3-cpu`, or `my-dolphin`).
+   - **Model name:** must match a name Ollama serves (see `ollama list`). **Cursor’s UI often rejects names with hyphens** (e.g. `my-dolphin`) with *Model name is not valid*. Use **letters, numbers, underscores only** in the name you add in Cursor (e.g. `mydolphin`). You can duplicate a model without renaming files: `ollama cp my-dolphin mydolphin`.
    - **Override OpenAI Base URL:** paste the ngrok URL with `/v1`, e.g. `https://xxxx.ngrok-free.app/v1`.
-   - **API key:** any placeholder (e.g. `ollama`) if the UI requires a value.
+   - **OpenAI API Key:** turn **ON** and enter a placeholder (e.g. `ollama` or `sk-local`). Many setups fail if the key toggle is off while using a custom base URL.
 3. Select that model in Chat and test with a short prompt.
 
 ---
@@ -144,6 +144,8 @@ Runs the PowerShell script with `-ExecutionPolicy Bypass`.
 | `ERR_NGROK_121` / agent too old | Run `ngrok update` or `winget upgrade Ngrok.Ngrok`; free accounts require a minimum agent version (see ngrok error text). |
 | Tunnel never appears | Check the ngrok window for errors; confirm authtoken. |
 | Cursor cannot reach model | Base URL must end with `/v1`; model name must match `ollama list`. |
+| *Model name is not valid* (Cursor) | Try a name **without hyphens** (`mydolphin` not `my-dolphin`); run `ollama cp old-name new_name`. Turn **OpenAI API Key** **on** with a placeholder key. |
+| `GET /v1` → 404 in ngrok | Normal if something requested bare `/v1` (e.g. browser). Use `/v1/models` or let Cursor call `/v1/chat/completions`. |
 | Wrong Ollama port | Set `OLLAMA_HOST` or use `-Port` on the script. |
 
 ---
